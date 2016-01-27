@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Waker Upper</string>
+
+    <string name="text_watch_title">Text Watch</string>
+    <string name="text_watch_description_pre">Sounds will be enabled after receiving </string>
+    <string name="text_watch_description_post"> texts and not responding.</string>
+    <string name="call_watch_title">Call Watch</string>
+    <string name="call_watch_description">Sounds will be enabled when receiving a call.</string>
+    <string name="enable_button">Turn On</string>
+    <string name="disable_button">Turn Off</string>
 </resources>

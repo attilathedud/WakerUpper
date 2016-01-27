@@ -5,8 +5,225 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.attila.wakerupper.MainActivity">
+    tools:context="com.attila.wakerupper.MainActivity"
+    android:background="@color/colorLightOcean">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6">
+
+        <com.serchinastico.coolswitch.TargetFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/disabled_view_text_watch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorLightSky"
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:id="@+id/enabled_view_text_watch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/yellow_to_orange_gradient"
+                android:orientation="vertical"/>
+
+        </com.serchinastico.coolswitch.TargetFrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_watch_title"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_watch_description_pre"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <EditText
+                            android:layout_width="40dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:ems="10"
+                            android:id="@+id/etTextsToReceive"
+                            android:textSize="14dp"
+                            android:gravity="right"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="-10dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_watch_description_post"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"/>
+                    </LinearLayout>
 
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.serchinastico.coolswitch.CoolSwitch
+                        android:id="@+id/csTextWatch"
+                        android:layout_height="35dp"
+                        android:layout_width="60dp"
+                        android:layout_marginLeft="50dp"
+                        coolswitch:disabledView="@id/disabled_view_text_watch"
+                        coolswitch:enabledView="@id/enabled_view_text_watch"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6">
+
+        <com.serchinastico.coolswitch.TargetFrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/disabled_view_phone_watch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/sky_to_ocean_gradient"
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:id="@+id/enabled_view_phone_watch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/orange_to_ocean_gradient"
+                android:orientation="vertical"/>
+
+        </com.serchinastico.coolswitch.TargetFrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/call_watch_title"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/call_watch_description"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <com.serchinastico.coolswitch.CoolSwitch
+                        android:id="@+id/csCallWatch"
+                        android:layout_height="35dp"
+                        android:layout_width="60dp"
+                        android:layout_marginLeft="50dp"
+                        coolswitch:disabledView="@id/disabled_view_phone_watch"
+                        coolswitch:enabledView="@id/enabled_view_phone_watch"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/ivSubmarine"
+            android:alpha="0.0"
+            android:src="@drawable/submarine2"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="-25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enable_button"
+            android:background="@drawable/row_boat_gradient"
+            android:id="@+id/bTurnOnOff"
+            android:alpha="0.7"
+            android:layout_marginStart="150dp"
+            android:layout_marginLeft="150dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
 
 </LinearLayout>

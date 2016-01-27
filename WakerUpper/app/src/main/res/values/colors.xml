@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#223344</color>
+    <color name="colorSunsetYellow">#ffcc00</color>
+    <color name="colorSunsetOrange">#ddaa33</color>
+    <color name="colorLightOcean">#4499aa</color>
+    <color name="colorLightSky">#0066aa</color>
+
+    <color name="colorRowBoatInside">#aa9966</color>
+    <color name="colorRowBoatOutside">#aa7733</color>
 </resources>
