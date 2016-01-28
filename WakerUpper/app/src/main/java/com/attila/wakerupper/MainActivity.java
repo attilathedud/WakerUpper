@@ -1,7 +1,13 @@
 package com.attila.wakerupper;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     TimerTask timerTask;
     final Handler handler = new Handler();
 
+    int mId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         DebugLogger.init();
         ButterKnife.bind(this);
+    }
 
-        //todo: move to onresume
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         timer = new Timer();
 
         timerTask = new TimerTask() {
@@ -61,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
         };
 
         timer.schedule(timerTask, 5000, 5000);
+
+        if( ReceiverFactory.isHandlerAttached(this) ) {
+            turnOnUIEffects();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        timer.cancel();
+        timerTask.cancel();
     }
 
     @OnClick(R.id.csCallWatch)
@@ -85,47 +109,83 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.bTurnOnOff)
     public void bTurnOnOffClicked() {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
+            turnOnUIEffects();
+            ReceiverFactory.bindHandler(this);
 
-            bTurnOnOff.setEnabled(false);
-            bTurnOnOff.setClickable(false);
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(this)
+                            .setSmallIcon(R.mipmap.ic_launcher)
+                            .setContentTitle("Monitoring")
+                            .setContentText("Checking for texts and phone calls")
+                            .setOngoing(true);
 
-            ViewAnimator.animate(ivSubmarine)
-                    .rotation(-90)
-                    .fadeIn()
-                    .translationY(1000, 0).descelerate()
-                    .duration(1000)
-                        .thenAnimate(ivSubmarine)
-                        .rotation(360)
-                        .duration(1000)
-                    .onStop(new AnimationListener.Stop() {
-                        @Override
-                        public void onStop() {
-                            bTurnOnOff.setText(R.string.disable_button);
-                            bTurnOnOff.setEnabled(true);
-                            bTurnOnOff.setClickable(true);
-                        }
-                    })
-                    .start();
+            Intent resultIntent = new Intent(this, MainActivity.class);
+
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addParentStack(MainActivity.class);
+            stackBuilder.addNextIntent(resultIntent);
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(
+                            0,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+            mBuilder.setContentIntent(resultPendingIntent);
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            mNotificationManager.notify(mId, mBuilder.build());
         }
         else {
-            bTurnOnOff.setEnabled(false);
-            bTurnOnOff.setClickable(false);
+            turnOffUIEffects();
+            ReceiverFactory.unbindHandler(this);
 
-            ViewAnimator.animate(ivSubmarine)
-                    .rotation(90)
-                    .fadeOut()
-                    .translationY(0, 1000).descelerate()
-                    .duration(500)
-                    .onStop(new AnimationListener.Stop() {
-                        @Override
-                        public void onStop() {
-                            bTurnOnOff.setText(R.string.enable_button);
-                            bTurnOnOff.setEnabled(true);
-                            bTurnOnOff.setClickable(true);
-                        }
-                    })
-                    .start();
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.cancel(mId);
         }
+    }
+
+    private void turnOnUIEffects() {
+        bTurnOnOff.setEnabled(false);
+        bTurnOnOff.setClickable(false);
+
+        ViewAnimator.animate(ivSubmarine)
+                .rotation(-90)
+                .fadeIn()
+                .translationY(1000, 0).descelerate()
+                .duration(1000)
+                .thenAnimate(ivSubmarine)
+                .rotation(360)
+                .duration(1000)
+                .onStop(new AnimationListener.Stop() {
+                    @Override
+                    public void onStop() {
+                        bTurnOnOff.setText(R.string.disable_button);
+                        bTurnOnOff.setEnabled(true);
+                        bTurnOnOff.setClickable(true);
+                    }
+                })
+                .start();
+    }
+
+    private void turnOffUIEffects() {
+        bTurnOnOff.setEnabled(false);
+        bTurnOnOff.setClickable(false);
+
+        ViewAnimator.animate(ivSubmarine)
+                .rotation(90)
+                .fadeOut()
+                .translationY(0, 1000).descelerate()
+                .duration(500)
+                .onStop(new AnimationListener.Stop() {
+                    @Override
+                    public void onStop() {
+                        bTurnOnOff.setText(R.string.enable_button);
+                        bTurnOnOff.setEnabled(true);
+                        bTurnOnOff.setClickable(true);
+                    }
+                })
+                .start();
     }
 
 }
