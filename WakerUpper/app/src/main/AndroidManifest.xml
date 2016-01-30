@@ -25,6 +25,7 @@
         <receiver android:name=".SMSReceiver" android:enabled="false">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="com.attila.wakerupper.update_text_amount" />
             </intent-filter>
         </receiver>
     </application>

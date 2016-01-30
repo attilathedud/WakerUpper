@@ -9,29 +9,40 @@ import android.os.Vibrator;
 
 public class SMSReceiver extends BroadcastReceiver {
 
-    private int textsToAllow;
-
-    public SMSReceiver() {
-
-    }
-
-    public SMSReceiver(int textsToAllow) {
-        this.textsToAllow = textsToAllow;
-    }
+    private int _textAmount;
+    private int _textsReceived;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Bundle bundle = intent.getExtras();
-
-        if( bundle == null )
+        String action = intent.getAction();
+        if( action == null )
             return;
 
-        // Vibrate the mobile phone
-        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(2000);
+        if(action.equals(context.getString(R.string.update_text_service_key))){
+            _textAmount = intent.getExtras().getInt(context.getString(R.string.text_amount_service_key));
+        }
+        else {
+            Bundle bundle = intent.getExtras();
+            if( bundle == null )
+                return;
 
-        // Max out volume on phone
-        AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        am.setStreamVolume( AudioManager.STREAM_RING, am.getStreamMaxVolume(AudioManager.STREAM_RING), 0);
+            //todo: use getMessagesFromIntent (Intent intent)
+            Object messages[] = (Object[]) bundle.get("pdus");
+            if( messages == null )
+                return;
+
+            _textsReceived += messages.length;
+
+            if( _textsReceived >= _textAmount ) {
+                // Vibrate the mobile phone
+                Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                vibrator.vibrate(2000);
+
+                // Max out volume on phone
+                AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                am.setStreamVolume(AudioManager.STREAM_RING, am.getStreamMaxVolume(AudioManager.STREAM_RING), 0);
+            }
+        }
+
     }
 }

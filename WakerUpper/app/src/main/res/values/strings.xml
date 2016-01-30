@@ -8,4 +8,6 @@
     <string name="call_watch_description">Sounds will be enabled when receiving a call.</string>
     <string name="enable_button">Turn On</string>
     <string name="disable_button">Turn Off</string>
+    <string name="update_text_service_key">com.attila.wakerupper.update_text_amount</string>
+    <string name="text_amount_service_key">text_amount</string>
 </resources>
