@@ -1,23 +1,18 @@
 package com.attila.wakerupper.Activities;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.attila.wakerupper.Logging.DebugLogger;
+import com.attila.wakerupper.Factories.AnimationFactory;
 import com.attila.wakerupper.Factories.NotificationFactory;
 import com.attila.wakerupper.Factories.ReceiverFactory;
+import com.attila.wakerupper.Logging.DebugLogger;
 import com.attila.wakerupper.R;
-import com.github.florent37.viewanimator.AnimationListener;
-import com.github.florent37.viewanimator.ViewAnimator;
 import com.serchinastico.coolswitch.CoolSwitch;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.etTextsToReceive) EditText etTextsToReceive;
 
-    Timer timer;
-    TimerTask timerTask;
-    final Handler handler = new Handler();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,29 +45,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        timer = new Timer();
-
-        timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        ViewAnimator
-                                .animate(ivSubmarine)
-                                .wave()
-                                .duration(3000)
-                                .start();
-                    }
-                });
-            }
-        };
-
-        timer.schedule(timerTask, 5000, 5000);
+        AnimationFactory.onResume(ivSubmarine);
 
         if( ReceiverFactory.isHandlerAttached(this) ) {
-            //todo: just enable effects without animation
-            turnOnUIEffects(0);
+            AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine, 0);
         }
     }
 
@@ -84,8 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        timer.cancel();
-        timerTask.cancel();
+        AnimationFactory.onPause();
     }
 
     @OnClick(R.id.csCallWatch)
@@ -110,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.bTurnOnOff)
     public void bTurnOnOffClicked() {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
-            turnOnUIEffects();
+            AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine);
 
             int textsToReceive = 0;
 
@@ -123,56 +94,10 @@ public class MainActivity extends AppCompatActivity {
                     !csTextWatch.isChecked(), !csCallWatch.isChecked());
         }
         else {
-            turnOffUIEffects();
+            AnimationFactory.turnOffUIEffects(bTurnOnOff, ivSubmarine);
             ReceiverFactory.unbindHandler(this);
             NotificationFactory.disableNotification(this);
         }
-    }
-
-    private void turnOnUIEffects( int... duration ) {
-
-        int _duration = duration.length > 0 ? duration[0] : 1000;
-
-        bTurnOnOff.setEnabled(false);
-        bTurnOnOff.setClickable(false);
-        bTurnOnOff.setText(R.string.disable_button);
-
-        ViewAnimator.animate(ivSubmarine)
-                .rotation(-90)
-                .fadeIn()
-                .translationY(1000, 0).descelerate()
-                .duration(_duration)
-                .thenAnimate(ivSubmarine)
-                .rotation(360)
-                .duration(_duration)
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        bTurnOnOff.setEnabled(true);
-                        bTurnOnOff.setClickable(true);
-                    }
-                })
-                .start();
-    }
-
-    private void turnOffUIEffects() {
-        bTurnOnOff.setEnabled(false);
-        bTurnOnOff.setClickable(false);
-        bTurnOnOff.setText(R.string.enable_button);
-
-        ViewAnimator.animate(ivSubmarine)
-                .rotation(90)
-                .fadeOut()
-                .translationY(0, 1000).descelerate()
-                .duration(500)
-                .onStop(new AnimationListener.Stop() {
-                    @Override
-                    public void onStop() {
-                        bTurnOnOff.setEnabled(true);
-                        bTurnOnOff.setClickable(true);
-                    }
-                })
-                .start();
     }
 
 }
