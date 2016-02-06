@@ -1,4 +1,4 @@
-package com.attila.wakerupper;
+package com.attila.wakerupper.Factories;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+
+import com.attila.wakerupper.R;
 
 public class NotificationFactory {
 

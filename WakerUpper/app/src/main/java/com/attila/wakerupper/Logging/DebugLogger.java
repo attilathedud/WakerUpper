@@ -1,5 +1,6 @@
-package com.attila.wakerupper;
+package com.attila.wakerupper.Logging;
 
+import com.attila.wakerupper.BuildConfig;
 import com.orhanobut.logger.Logger;
 
 public class DebugLogger {

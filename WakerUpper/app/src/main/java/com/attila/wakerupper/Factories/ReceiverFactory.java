@@ -1,9 +1,12 @@
-package com.attila.wakerupper;
+package com.attila.wakerupper.Factories;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+
+import com.attila.wakerupper.R;
+import com.attila.wakerupper.Receivers.SMSReceiver;
 
 public class ReceiverFactory {
 

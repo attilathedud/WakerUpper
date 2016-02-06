@@ -1,4 +1,4 @@
-package com.attila.wakerupper;
+package com.attila.wakerupper.Activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +8,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.attila.wakerupper.Logging.DebugLogger;
+import com.attila.wakerupper.Factories.NotificationFactory;
+import com.attila.wakerupper.Factories.ReceiverFactory;
+import com.attila.wakerupper.R;
 import com.github.florent37.viewanimator.AnimationListener;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.serchinastico.coolswitch.CoolSwitch;
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(timerTask, 5000, 5000);
 
         if( ReceiverFactory.isHandlerAttached(this) ) {
+            //todo: just enable effects without animation
             turnOnUIEffects();
         }
     }

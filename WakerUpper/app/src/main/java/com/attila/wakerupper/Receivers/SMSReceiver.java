@@ -1,4 +1,4 @@
-package com.attila.wakerupper;
+package com.attila.wakerupper.Receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+
+import com.attila.wakerupper.R;
 
 public class SMSReceiver extends BroadcastReceiver {
 
