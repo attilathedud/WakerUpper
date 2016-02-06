@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         if( ReceiverFactory.isHandlerAttached(this) ) {
             //todo: just enable effects without animation
-            turnOnUIEffects();
+            turnOnUIEffects(0);
         }
     }
 
@@ -129,7 +129,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void turnOnUIEffects() {
+    private void turnOnUIEffects( int... duration ) {
+
+        int _duration = duration.length > 0 ? duration[0] : 1000;
+
         bTurnOnOff.setEnabled(false);
         bTurnOnOff.setClickable(false);
         bTurnOnOff.setText(R.string.disable_button);
@@ -138,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
                 .rotation(-90)
                 .fadeIn()
                 .translationY(1000, 0).descelerate()
-                .duration(1000)
+                .duration(_duration)
                 .thenAnimate(ivSubmarine)
                 .rotation(360)
-                .duration(1000)
+                .duration(_duration)
                 .onStop(new AnimationListener.Stop() {
                     @Override
                     public void onStop() {
