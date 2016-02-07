@@ -110,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.llTextSwitch)
+    public void textIconClicked() {
+        csTextWatch.performClick();
+    }
+
+    @OnClick(R.id.llCallSwitch)
+    public void callIconClicked() {
+        csCallWatch.performClick();
+    }
+
     private int _safeGetTextAmount() {
         int textsToReceive = -1;
 
