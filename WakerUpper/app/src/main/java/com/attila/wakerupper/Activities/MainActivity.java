@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
             int textsToReceive = _safeGetTextAmount();
             SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
 
-            ReceiverFactory.bindHandler(this, textsToReceive);
+            //coolswitch toggles seem to reverse on and off from a UI perspective
+            ReceiverFactory.bindHandler(this, !csTextWatch.isChecked(), !csCallWatch.isChecked(), textsToReceive);
             NotificationFactory.enableNotification(this, MainActivity.class,
                     !csTextWatch.isChecked(), !csCallWatch.isChecked());
         }

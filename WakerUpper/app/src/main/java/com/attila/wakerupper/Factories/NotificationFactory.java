@@ -28,7 +28,7 @@ public class NotificationFactory {
                         .setContentText(_sbBuilder.toString())
                         .setOngoing(true);
 
-        //stolen from google's example on how to bind a notification to an activity
+        //stolen from goggle's example on how to bind a notification to an activity
         Intent resultIntent = new Intent(context, parentActivity);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
