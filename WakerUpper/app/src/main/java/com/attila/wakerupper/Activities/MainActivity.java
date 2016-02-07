@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.attila.wakerupper.Factories.AnimationFactory;
 import com.attila.wakerupper.Factories.NotificationFactory;
 import com.attila.wakerupper.Factories.ReceiverFactory;
+import com.attila.wakerupper.Factories.SharedPreferencesFactory;
 import com.attila.wakerupper.Logging.DebugLogger;
 import com.attila.wakerupper.R;
 import com.serchinastico.coolswitch.CoolSwitch;
@@ -45,6 +46,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        Integer textAmount = SharedPreferencesFactory.readInt(this, getString(R.string.text_amount_service_key));
+        if( textAmount == -1 ) {
+            SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), 3);
+            textAmount = 3;
+        }
+
+        etTextsToReceive.setText(textAmount.toString());
+
         AnimationFactory.onResume(ivSubmarine);
 
         if( ReceiverFactory.isHandlerAttached(this) ) {
@@ -57,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         AnimationFactory.onPause();
+
+        int textsToReceive = _safeGetTextAmount();
+        SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
     }
 
     @OnClick(R.id.csCallWatch)
@@ -83,11 +95,8 @@ public class MainActivity extends AppCompatActivity {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
             AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine);
 
-            int textsToReceive = 0;
-
-            if( etTextsToReceive != null && etTextsToReceive.getText().length() != 0) {
-                textsToReceive = Integer.valueOf(etTextsToReceive.getText().toString());
-            }
+            int textsToReceive = _safeGetTextAmount();
+            SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
 
             ReceiverFactory.bindHandler(this, textsToReceive);
             NotificationFactory.enableNotification(this, MainActivity.class,
@@ -98,6 +107,20 @@ public class MainActivity extends AppCompatActivity {
             ReceiverFactory.unbindHandler(this);
             NotificationFactory.disableNotification(this);
         }
+    }
+
+    private int _safeGetTextAmount() {
+        int textsToReceive = -1;
+
+        if( etTextsToReceive != null && etTextsToReceive.getText().length() != 0) {
+            textsToReceive = Integer.valueOf(etTextsToReceive.getText().toString());
+        }
+
+        if( textsToReceive == -1 ) {
+            textsToReceive = 3;
+        }
+
+        return textsToReceive;
     }
 
 }
