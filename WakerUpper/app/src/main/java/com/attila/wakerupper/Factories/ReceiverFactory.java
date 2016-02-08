@@ -23,6 +23,7 @@ public class ReceiverFactory {
         if( isTextMonitoringEnabled ) {
             _internalBindUnbind(context, SMSReceiver.class, true);
             _internalSendTextAmount(context, textAmount);
+            resetTextsReceived(context);
         }
 
         if( isPhoneMonitoringEnabled ) {
@@ -33,6 +34,11 @@ public class ReceiverFactory {
     public static void unbindHandler(Context context) {
         _internalBindUnbind(context, SMSReceiver.class, false);
         _internalBindUnbind(context, PhoneReceiver.class, false);
+    }
+
+    public static void resetTextsReceived( Context context ) {
+        Intent i = new Intent(context.getString(R.string.reset_text_service_key));
+        context.sendBroadcast(i);
     }
 
     private static void _internalBindUnbind( Context context, Class receiver, boolean enabled ) {

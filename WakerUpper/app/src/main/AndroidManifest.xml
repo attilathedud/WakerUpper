@@ -3,6 +3,7 @@
     package="com.attila.wakerupper">
 
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
@@ -26,6 +27,7 @@
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="com.attila.wakerupper.update_text_amount" />
+                <action android:name="com.attila.wakerupper.reset_text_amount" />
             </intent-filter>
         </receiver>
 
@@ -34,6 +36,9 @@
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter>
         </receiver>
+
+        <service android:name=".Services.ListenSMSService" android:enabled="true"/>
+
     </application>
 
 </manifest>

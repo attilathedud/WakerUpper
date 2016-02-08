@@ -1,5 +1,6 @@
 package com.attila.wakerupper.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import com.attila.wakerupper.Factories.ReceiverFactory;
 import com.attila.wakerupper.Factories.SharedPreferencesFactory;
 import com.attila.wakerupper.Logging.DebugLogger;
 import com.attila.wakerupper.R;
+import com.attila.wakerupper.Services.ListenSMSService;
 import com.serchinastico.coolswitch.CoolSwitch;
 
 import butterknife.Bind;
@@ -102,11 +104,17 @@ public class MainActivity extends AppCompatActivity {
             ReceiverFactory.bindHandler(this, !csTextWatch.isChecked(), !csCallWatch.isChecked(), textsToReceive);
             NotificationFactory.enableNotification(this, MainActivity.class,
                     !csTextWatch.isChecked(), !csCallWatch.isChecked());
+
+            Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
+            startService(intent);
         }
         else {
             AnimationFactory.turnOffUIEffects(bTurnOnOff, ivSubmarine);
             ReceiverFactory.unbindHandler(this);
             NotificationFactory.disableNotification(this);
+
+            Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
+            stopService(intent);
         }
     }
 

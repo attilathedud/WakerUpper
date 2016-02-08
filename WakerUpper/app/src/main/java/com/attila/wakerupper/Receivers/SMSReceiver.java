@@ -23,6 +23,9 @@ public class SMSReceiver extends BroadcastReceiver {
         if(action.equals(context.getString(R.string.update_text_service_key))){
             _textAmount = intent.getExtras().getInt(context.getString(R.string.text_amount_service_key));
         }
+        else if( action.equals(context.getString(R.string.reset_text_service_key))) {
+            _textsReceived = 0;
+        }
         else {
             Bundle bundle = intent.getExtras();
             if( bundle == null )
