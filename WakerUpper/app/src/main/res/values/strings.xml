@@ -14,6 +14,7 @@
     <string name="update_text_service_key">com.attila.wakerupper.update_text_amount</string>
     <string name="reset_text_service_key">com.attila.wakerupper.reset_text_amount</string>
     <string name="text_amount_service_key">text_amount</string>
+    <string name="text_received_service_key">text_received</string>
     <string name="shared_prefs_file_name">com.attila.wakerupper.sharedprefs</string>
     <string name="text_amount_default_key">3</string>
 

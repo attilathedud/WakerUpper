@@ -2,7 +2,6 @@ package com.attila.wakerupper.Factories;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import com.attila.wakerupper.R;
@@ -22,7 +21,6 @@ public class ReceiverFactory {
 
         if( isTextMonitoringEnabled ) {
             _internalBindUnbind(context, SMSReceiver.class, true);
-            _internalSendTextAmount(context, textAmount);
             resetTextsReceived(context);
         }
 
@@ -37,8 +35,7 @@ public class ReceiverFactory {
     }
 
     public static void resetTextsReceived( Context context ) {
-        Intent i = new Intent(context.getString(R.string.reset_text_service_key));
-        context.sendBroadcast(i);
+        SharedPreferencesFactory.writeInt(context, context.getString(R.string.text_received_service_key), 0);
     }
 
     private static void _internalBindUnbind( Context context, Class receiver, boolean enabled ) {
@@ -47,12 +44,6 @@ public class ReceiverFactory {
         pm.setComponentEnabledSetting(componentName,
                 enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
-    }
-
-    private static void _internalSendTextAmount( Context context, int textAmount ) {
-        Intent i = new Intent(context.getString(R.string.update_text_service_key));
-        i.putExtra(context.getString(R.string.text_amount_service_key), textAmount);
-        context.sendBroadcast(i);
     }
 
 }

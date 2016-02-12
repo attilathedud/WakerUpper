@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Handler;
 
 import com.attila.wakerupper.Factories.ReceiverFactory;
-import com.attila.wakerupper.Logging.DebugLogger;
 
 public class SMSSentObserver extends ContentObserver {
 
@@ -35,7 +34,6 @@ public class SMSSentObserver extends ContentObserver {
                 return;
             }
 
-            DebugLogger.Log("Message sent");
             ReceiverFactory.resetTextsReceived(context);
         }
     }

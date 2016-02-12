@@ -10,7 +10,6 @@ import android.os.Vibrator;
 public class PhoneReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
         Bundle bundle = intent.getExtras();
         if( bundle == null )
             return;
