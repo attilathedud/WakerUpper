@@ -17,7 +17,7 @@ public class ReceiverFactory {
     }
 
     public static void bindHandler(Context context, boolean isTextMonitoringEnabled,
-                                   boolean isPhoneMonitoringEnabled, int textAmount) {
+                                   boolean isPhoneMonitoringEnabled) {
 
         if( isTextMonitoringEnabled ) {
             _internalBindUnbind(context, SMSReceiver.class, true);

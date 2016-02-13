@@ -20,6 +20,7 @@ import com.serchinastico.coolswitch.CoolSwitch;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
             llEnabledViewTextWatch.setBackgroundResource(R.drawable.yellow_to_orange_gradient);
             llDisabledViewTextWatch.setBackgroundResource(R.drawable.sky_to_orange_gradient);
         }
+
+        if( bTurnOnOff.getText().equals(getString(R.string.disable_button)) ) {
+            disableHandler();
+            enableHandler();
+        }
     }
 
     @OnClick(R.id.csTextWatch)
@@ -90,42 +96,41 @@ public class MainActivity extends AppCompatActivity {
         if( !csCallWatch.isChecked() ) {
             llDisabledViewTextWatch.setBackgroundResource(R.drawable.sky_to_orange_gradient);
         }
+
+        if( bTurnOnOff.getText().equals(getString(R.string.disable_button)) ) {
+            disableHandler();
+            enableHandler();
+        }
     }
 
     @OnClick(R.id.bTurnOnOff)
     public void bTurnOnOffClicked() {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
             AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine);
-
-            int textsToReceive = _safeGetTextAmount();
-            SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
-
-            //coolswitch toggles seem to reverse on and off from a UI perspective
-            ReceiverFactory.bindHandler(this, !csTextWatch.isChecked(), !csCallWatch.isChecked(), textsToReceive);
-            NotificationFactory.enableNotification(this, MainActivity.class,
-                    !csTextWatch.isChecked(), !csCallWatch.isChecked());
-
-            Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
-            startService(intent);
+            enableHandler();
         }
         else {
             AnimationFactory.turnOffUIEffects(bTurnOnOff, ivSubmarine);
-            ReceiverFactory.unbindHandler(this);
-            NotificationFactory.disableNotification(this);
-
-            Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
-            stopService(intent);
+            disableHandler();
         }
     }
 
     @OnClick(R.id.llTextSwitch)
     public void textIconClicked() {
         csTextWatch.performClick();
+        textWatchClicked();
     }
 
     @OnClick(R.id.llCallSwitch)
     public void callIconClicked() {
         csCallWatch.performClick();
+        callWatchClicked();
+    }
+
+    @OnTextChanged(R.id.etTextsToReceive)
+    public void onTextChanged(CharSequence text) {
+        int textsToReceive = _safeGetTextAmount();
+        SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
     }
 
     private int _safeGetTextAmount() {
@@ -140,6 +145,24 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return textsToReceive;
+    }
+
+    private void enableHandler() {
+        //coolswitch toggles seem to reverse on and off from a UI perspective
+        ReceiverFactory.bindHandler(this, !csTextWatch.isChecked(), !csCallWatch.isChecked());
+        NotificationFactory.enableNotification(this, MainActivity.class,
+                !csTextWatch.isChecked(), !csCallWatch.isChecked());
+
+        Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
+        startService(intent);
+    }
+
+    private void disableHandler() {
+        ReceiverFactory.unbindHandler(this);
+        NotificationFactory.disableNotification(this);
+
+        Intent intent = new Intent(MainActivity.this, ListenSMSService.class);
+        stopService(intent);
     }
 
 }

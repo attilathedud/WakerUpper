@@ -18,8 +18,12 @@ public class NotificationFactory {
         StringBuilder _sbBuilder = new StringBuilder("Checking for ");
         if( textEnabled )
             _sbBuilder.append("texts");
+        if( textEnabled && phoneEnabled)
+            _sbBuilder.append(" and ");
         if( phoneEnabled )
-            _sbBuilder.append(" and phone calls");
+            _sbBuilder.append("phone calls");
+        if( !textEnabled && !phoneEnabled )
+            _sbBuilder.append("nothing");
         _sbBuilder.append(".");
 
         NotificationCompat.Builder _builder = new NotificationCompat.Builder(context)
@@ -28,7 +32,7 @@ public class NotificationFactory {
                         .setContentText(_sbBuilder.toString())
                         .setOngoing(true);
 
-        //stolen from goggle's example on how to bind a notification to an activity
+        //stolen from google's example on how to bind a notification to an activity
         Intent resultIntent = new Intent(context, parentActivity);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
