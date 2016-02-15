@@ -66,11 +66,20 @@ public class MainActivity extends AppCompatActivity {
         //android doesn't save & restore togglebuttons for some reason, so we need to do it manually
         boolean csTextWatchChecked = SharedPreferencesFactory.readBoolean(this, getString(R.string.text_watch_enabled_service_key));
         csTextWatch.setChecked(csTextWatchChecked);
-        textWatchClicked();
+        if( !csCallWatch.isChecked() ) {
+            llDisabledViewTextWatch.setBackgroundResource(R.drawable.sky_to_orange_gradient);
+        }
 
         boolean csCallWatchChecked = SharedPreferencesFactory.readBoolean(this, getString(R.string.call_watch_enabled_service_key));
         csCallWatch.setChecked(csCallWatchChecked);
-        callWatchClicked();
+        if( csCallWatch.isChecked() ) {
+            llEnabledViewTextWatch.setBackgroundResource(R.drawable.yellow_to_sky_gradient);
+            llDisabledViewTextWatch.setBackgroundResource(R.color.colorLightSky);
+        }
+        else {
+            llEnabledViewTextWatch.setBackgroundResource(R.drawable.yellow_to_orange_gradient);
+            llDisabledViewTextWatch.setBackgroundResource(R.drawable.sky_to_orange_gradient);
+        }
     }
 
     @Override

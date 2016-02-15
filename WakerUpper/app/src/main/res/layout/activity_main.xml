@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:ems="10"
-                            android:maxLength="4"
+                            android:maxLength="2"
                             android:id="@+id/etTextsToReceive"
                             android:textSize="14dp"
                             android:gravity="right"

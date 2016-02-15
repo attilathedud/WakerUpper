@@ -31,10 +31,13 @@ public class SMSSentObserver extends ContentObserver {
             int type = cursor.getInt( cursor.getColumnIndex("type") );
 
             if ( protocol != null || type != MESSAGE_SENT_TYPE ) {
+                cursor.close();
                 return;
             }
 
             ReceiverFactory.resetTextsReceived(context);
         }
+
+        cursor.close();
     }
 }

@@ -18,8 +18,8 @@ public class SMSReceiver extends BroadcastReceiver {
         if( bundle == null )
             return;
 
-        //todo: use getMessagesFromIntent (Intent intent)
-        Object messages[] = (Object[]) bundle.get("pdus");
+        //can't use getMessagesFromIntent due to api level
+        Object[] messages = (Object[]) bundle.get("pdus");
         if( messages == null )
             return;
 
@@ -30,6 +30,8 @@ public class SMSReceiver extends BroadcastReceiver {
         SharedPreferencesFactory.writeInt(context, context.getString(R.string.text_received_service_key), _textsReceived);
 
         int _textAmount = SharedPreferencesFactory.readInt(context, context.getString(R.string.text_amount_service_key));
+
+        //DebugLogger.Log("textsReceived: " + _textsReceived + "\ntextAmount: " + _textAmount);
 
         if( _textsReceived >= _textAmount ) {
             // Vibrate the mobile phone
