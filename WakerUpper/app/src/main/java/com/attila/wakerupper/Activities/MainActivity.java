@@ -120,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
             AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine);
             enableHandler();
+
+            if( etTextsToReceive.length() == 0 ) {
+                etTextsToReceive.setText("3");
+            }
         }
         else {
             AnimationFactory.turnOffUIEffects(bTurnOnOff, ivSubmarine);
