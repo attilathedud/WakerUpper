@@ -12,8 +12,10 @@ public class ReceiverFactory {
 
     public static boolean isHandlerAttached(Context context) {
         PackageManager pm  = context.getPackageManager();
-        ComponentName componentName = new ComponentName(context, SMSReceiver.class);
-        return pm.getComponentEnabledSetting(componentName) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+        ComponentName componentName1 = new ComponentName(context, SMSReceiver.class);
+        ComponentName componentName2 = new ComponentName(context, PhoneReceiver.class);
+        return pm.getComponentEnabledSetting(componentName1) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED ||
+                pm.getComponentEnabledSetting(componentName2) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
     }
 
     public static void bindHandler(Context context, boolean isTextMonitoringEnabled,

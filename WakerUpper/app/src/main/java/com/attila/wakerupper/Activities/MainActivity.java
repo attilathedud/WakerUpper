@@ -118,6 +118,10 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.bTurnOnOff)
     public void bTurnOnOffClicked() {
         if( bTurnOnOff.getText().equals(getString(R.string.enable_button))) {
+            //since coolswitch inverts the logic, only enable if one feature is selected
+            if( csTextWatch.isChecked() && csCallWatch.isChecked() )
+                return;
+
             AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine);
             enableHandler();
 
@@ -164,6 +168,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void enableHandler() {
+        //only enable if one feature is selected
+        if( csCallWatch.isChecked() && csTextWatch.isChecked() )
+            return;
+
         //coolswitch toggles seem to reverse on and off from a UI perspective
         ReceiverFactory.bindHandler(this, !csTextWatch.isChecked(), !csCallWatch.isChecked());
         NotificationFactory.enableNotification(this, MainActivity.class,
