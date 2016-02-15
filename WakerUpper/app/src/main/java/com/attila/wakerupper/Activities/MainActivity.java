@@ -69,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         AnimationFactory.onPause();
-
-        int textsToReceive = _safeGetTextAmount();
-        SharedPreferencesFactory.writeInt(this, getString(R.string.text_amount_service_key), textsToReceive);
     }
 
     @OnClick(R.id.csCallWatch)
