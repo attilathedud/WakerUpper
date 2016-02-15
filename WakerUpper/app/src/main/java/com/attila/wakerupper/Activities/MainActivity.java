@@ -62,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
         if( ReceiverFactory.isHandlerAttached(this) ) {
             AnimationFactory.turnOnUIEffects(bTurnOnOff, ivSubmarine, 0);
         }
+
+        //android doesn't save & restore togglebuttons for some reason, so we need to do it manually
+        boolean csTextWatchChecked = SharedPreferencesFactory.readBoolean(this, getString(R.string.text_watch_enabled_service_key));
+        csTextWatch.setChecked(csTextWatchChecked);
+        textWatchClicked();
+
+        boolean csCallWatchChecked = SharedPreferencesFactory.readBoolean(this, getString(R.string.call_watch_enabled_service_key));
+        csCallWatch.setChecked(csCallWatchChecked);
+        callWatchClicked();
     }
 
     @Override
@@ -86,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
             disableHandler();
             enableHandler();
         }
+
+        SharedPreferencesFactory.writeBoolean(this,
+                getString(R.string.call_watch_enabled_service_key), csCallWatch.isChecked());
     }
 
     @OnClick(R.id.csTextWatch)
@@ -98,6 +110,9 @@ public class MainActivity extends AppCompatActivity {
             disableHandler();
             enableHandler();
         }
+
+        SharedPreferencesFactory.writeBoolean(this,
+                getString(R.string.text_watch_enabled_service_key), csTextWatch.isChecked());
     }
 
     @OnClick(R.id.bTurnOnOff)

@@ -26,4 +26,20 @@ public class SharedPreferencesFactory {
         return sharedPref.getInt(key, -1);
     }
 
+    public static boolean writeBoolean( Context context, String key, boolean value ) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.shared_prefs_file_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(key, value);
+
+        return editor.commit();
+    }
+
+    public static boolean readBoolean( Context context, String key ) {
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                context.getString(R.string.shared_prefs_file_name), Context.MODE_PRIVATE);
+
+        return sharedPref.getBoolean(key, false);
+    }
+
 }
