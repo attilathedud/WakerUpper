@@ -176,6 +176,11 @@ public class MainActivity extends AppCompatActivity {
         return textsToReceive;
     }
 
+    @OnClick(R.id.etTextsToReceive)
+    public void etTextsOnClick() {
+        etTextsToReceive.setSelection(etTextsToReceive.length());
+    }
+
     private void enableHandler() {
         //only enable if one feature is selected
         if( csCallWatch.isChecked() && csTextWatch.isChecked() )
