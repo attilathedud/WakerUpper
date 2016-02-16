@@ -28,14 +28,15 @@ public class SMSSentObserver extends ContentObserver {
 
         if (cursor.moveToNext()) {
             String protocol = cursor.getString( cursor.getColumnIndex("protocol") );
-            int type = cursor.getInt( cursor.getColumnIndex("type") );
+            int type = cursor.getInt(cursor.getColumnIndex("type"));
+            long id = cursor.getLong(cursor.getColumnIndex("_id"));
 
             if ( protocol != null || type != MESSAGE_SENT_TYPE ) {
                 cursor.close();
                 return;
             }
 
-            ReceiverFactory.resetTextsReceived(context);
+            ReceiverFactory.resetTextsReceived(context, id);
         }
 
         cursor.close();

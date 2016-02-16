@@ -31,8 +31,6 @@ public class SMSReceiver extends BroadcastReceiver {
 
         int _textAmount = SharedPreferencesFactory.readInt(context, context.getString(R.string.text_amount_service_key));
 
-        //DebugLogger.Log("textsReceived: " + _textsReceived + "\ntextAmount: " + _textAmount);
-
         if( _textsReceived >= _textAmount ) {
             // Vibrate the mobile phone
             Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

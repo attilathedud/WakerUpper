@@ -19,5 +19,6 @@
     <string name="text_amount_default_key">3</string>
     <string name="call_watch_enabled_service_key">call_watch_enabled_toggle_button</string>
     <string name="text_watch_enabled_service_key">text_watch_enabled_toggle_button</string>
+    <string name="last_id_text_sent">last_id_text_sent</string>
 
 </resources>

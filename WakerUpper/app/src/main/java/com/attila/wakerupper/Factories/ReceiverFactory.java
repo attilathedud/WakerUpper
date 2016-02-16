@@ -23,7 +23,7 @@ public class ReceiverFactory {
 
         if( isTextMonitoringEnabled ) {
             _internalBindUnbind(context, SMSReceiver.class, true);
-            resetTextsReceived(context);
+            resetTextsReceived(context, -1);
         }
 
         if( isPhoneMonitoringEnabled ) {
@@ -36,8 +36,13 @@ public class ReceiverFactory {
         _internalBindUnbind(context, PhoneReceiver.class, false);
     }
 
-    public static void resetTextsReceived( Context context ) {
-        SharedPreferencesFactory.writeInt(context, context.getString(R.string.text_received_service_key), 0);
+    public static void resetTextsReceived( Context context, long sentTextId ) {
+        long lastStoredTextId = SharedPreferencesFactory.readLong(context, context.getString(R.string.last_id_text_sent));
+
+        if( lastStoredTextId != sentTextId ) {
+            SharedPreferencesFactory.writeInt(context, context.getString(R.string.text_received_service_key), 0);
+            SharedPreferencesFactory.writeLong(context, context.getString(R.string.last_id_text_sent), sentTextId);
+        }
     }
 
     private static void _internalBindUnbind( Context context, Class receiver, boolean enabled ) {
