@@ -7,8 +7,8 @@
     <string name="text_watch_description_post"> texts and not responding.</string>
     <string name="call_watch_title">Call Watch</string>
     <string name="call_watch_description">Sounds will be enabled when receiving a call.</string>
-    <string name="enable_button">Turn On</string>
-    <string name="disable_button">Turn Off</string>
+    <string name="enable_button">Start</string>
+    <string name="disable_button">Stop</string>
 
     <!-- Shared Preferences -->
     <string name="update_text_service_key">com.attila.wakerupper.update_text_amount</string>
