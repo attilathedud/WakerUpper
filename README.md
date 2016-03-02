@@ -2,12 +2,12 @@
 ##Download
 <table>
 <tr>
-<td>
+<td style="border-color: transparent; vertical-align:top;">
 <a href="https://play.google.com/store/apps/details?id=com.attila.wakerupper&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" width="216"/></a>
 </td>
-<td>
-<img src="https://attilathedud.github.io/WakerUpper/deviceart.png" alt="screenshot" width="600" height="300"/>
-<td>
+<td style="border-color: transparent; vertical-align:top;">
+<img src="https://attilathedud.github.io/WakerUpper/deviceart.png" alt="screenshot">
+</td>
 </tr>
 </table>
 
