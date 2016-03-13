@@ -24,3 +24,15 @@ It makes use of the following libraries:
 - [ViewAnimator](https://github.com/florent37/ViewAnimator/)
 - [CoolSwitch](https://github.com/Serchinastico/CoolSwitch/)
 - [logger](https://github.com/orhanobut/logger/)
+
+##Future Development
+- Sound alarm at a specific time
+- Allow user to adjust length of vibration
+- Ads
+- Allow number whitelists
+- Collapsible menu for additional options
+- MMS monitoring
+- Move layout stuff to dimens.xml
+- Create default resources for integers
+- Disable when on a call
+- Set volume on after a certain amount of time
