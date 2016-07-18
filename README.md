@@ -36,3 +36,4 @@ It makes use of the following libraries:
 - Create default resources for integers
 - Disable when on a call
 - Set volume on after a certain amount of time
+- Work on any user-defined notification
