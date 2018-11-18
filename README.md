@@ -5,8 +5,6 @@
   <a href="https://play.google.com/store/apps/details?id=com.attila.wakerupper&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1">
   <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" width="216">
   </a>
-
-  <img src="https://attilathedud.github.io/WakerUpper/deviceart.png" alt="screenshot">
 </div>
 
 ## About
