@@ -1,12 +1,6 @@
 # WakerUpper
 ### Due to Android 9 providing support for granular "Do Not Disturb" modes, this program is no longer actively maintained. 
 
-<div>
-  <a href="https://play.google.com/store/apps/details?id=com.attila.wakerupper&amp;utm_source=global_co&amp;utm_medium=prtnr&amp;utm_content=Mar2515&amp;utm_campaign=PartBadge&amp;pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1">
-  <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" width="216">
-  </a>
-</div>
-
 ## About
 Texts, calls, and even alarms are useless if you accidentally fall asleep with your phone on silent or low. The Waker Upper is watching out for you. With the “text watch” feature, your phone will turn up to the highest volume after you receive a certain number of texts. If you choose “phone watch,” the volume will turn up after you receive a phone call. You can set the number of texts and change these settings anytime. Gone are the days of “you snooze, you lose” when this simple-to-use app is on the watch.
 
